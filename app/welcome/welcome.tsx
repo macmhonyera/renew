@@ -1,89 +1,124 @@
-import logoDark from "./logo-dark.svg";
-import logoLight from "./logo-light.svg";
+import React, { useState } from 'react';
+import {
+  MapPinIcon,
+  TrashIcon,
+  CubeIcon,
+  DocumentTextIcon,
+  CalendarIcon,
+  CreditCardIcon
+} from '@heroicons/react/24/outline';
 
-export function Welcome() {
-  return (
-    <main className="flex items-center justify-center pt-16 pb-4">
-      <div className="flex-1 flex flex-col items-center gap-16 min-h-0">
-        <header className="flex flex-col items-center gap-9">
-          <div className="w-[500px] max-w-[100vw] p-4">
-            <img
-              src={logoLight}
-              alt="React Router"
-              className="block w-full dark:hidden"
-            />
-            <img
-              src={logoDark}
-              alt="React Router"
-              className="hidden w-full dark:block"
-            />
-          </div>
-        </header>
-        <div className="max-w-[300px] w-full space-y-6 px-4">
-          <nav className="rounded-3xl border border-gray-200 p-6 dark:border-gray-700 space-y-4">
-            <p className="leading-6 text-gray-700 dark:text-gray-200 text-center">
-              What&apos;s next?
-            </p>
-            <ul>
-              {resources.map(({ href, text, icon }) => (
-                <li key={href}>
-                  <a
-                    className="group flex items-center gap-3 self-stretch p-3 leading-normal text-blue-700 hover:underline dark:text-blue-500"
-                    href={href}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    {icon}
-                    {text}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        </div>
-      </div>
-    </main>
-  );
-}
+type Skip = {
+  size: string;
+  period: string;
+  price: number;
+};
 
-const resources = [
-  {
-    href: "https://reactrouter.com/docs",
-    text: "React Router Docs",
-    icon: (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="20"
-        viewBox="0 0 20 20"
-        fill="none"
-        className="stroke-gray-600 group-hover:stroke-current dark:stroke-gray-300"
-      >
-        <path
-          d="M9.99981 10.0751V9.99992M17.4688 17.4688C15.889 19.0485 11.2645 16.9853 7.13958 12.8604C3.01467 8.73546 0.951405 4.11091 2.53116 2.53116C4.11091 0.951405 8.73546 3.01467 12.8604 7.13958C16.9853 11.2645 19.0485 15.889 17.4688 17.4688ZM2.53132 17.4688C0.951566 15.8891 3.01483 11.2645 7.13974 7.13963C11.2647 3.01471 15.8892 0.951453 17.469 2.53121C19.0487 4.11096 16.9854 8.73551 12.8605 12.8604C8.73562 16.9853 4.11107 19.0486 2.53132 17.4688Z"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-        />
-      </svg>
-    ),
-  },
-  {
-    href: "https://rmx.as/discord",
-    text: "Join Discord",
-    icon: (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="20"
-        viewBox="0 0 24 20"
-        fill="none"
-        className="stroke-gray-600 group-hover:stroke-current dark:stroke-gray-300"
-      >
-        <path
-          d="M15.0686 1.25995L14.5477 1.17423L14.2913 1.63578C14.1754 1.84439 14.0545 2.08275 13.9422 2.31963C12.6461 2.16488 11.3406 2.16505 10.0445 2.32014C9.92822 2.08178 9.80478 1.84975 9.67412 1.62413L9.41449 1.17584L8.90333 1.25995C7.33547 1.51794 5.80717 1.99419 4.37748 2.66939L4.19 2.75793L4.07461 2.93019C1.23864 7.16437 0.46302 11.3053 0.838165 15.3924L0.868838 15.7266L1.13844 15.9264C2.81818 17.1714 4.68053 18.1233 6.68582 18.719L7.18892 18.8684L7.50166 18.4469C7.96179 17.8268 8.36504 17.1824 8.709 16.4944L8.71099 16.4904C10.8645 17.0471 13.128 17.0485 15.2821 16.4947C15.6261 17.1826 16.0293 17.8269 16.4892 18.4469L16.805 18.8725L17.3116 18.717C19.3056 18.105 21.1876 17.1751 22.8559 15.9238L23.1224 15.724L23.1528 15.3923C23.5873 10.6524 22.3579 6.53306 19.8947 2.90714L19.7759 2.73227L19.5833 2.64518C18.1437 1.99439 16.6386 1.51826 15.0686 1.25995ZM16.6074 10.7755L16.6074 10.7756C16.5934 11.6409 16.0212 12.1444 15.4783 12.1444C14.9297 12.1444 14.3493 11.6173 14.3493 10.7877C14.3493 9.94885 14.9378 9.41192 15.4783 9.41192C16.0471 9.41192 16.6209 9.93851 16.6074 10.7755ZM8.49373 12.1444C7.94513 12.1444 7.36471 11.6173 7.36471 10.7877C7.36471 9.94885 7.95323 9.41192 8.49373 9.41192C9.06038 9.41192 9.63892 9.93712 9.6417 10.7815C9.62517 11.6239 9.05462 12.1444 8.49373 12.1444Z"
-          strokeWidth="1.5"
-        />
-      </svg>
-    ),
-  },
+const skipSizes: Skip[] = [
+  { size: '4 Yard Skip', period: '7 days', price: 227 },
+  { size: '6 Yard Skip', period: '14 days', price: 300 },
+  { size: '8 Yard Skip', period: '7 days', price: 325 },
+  { size: '10 Yard Skip', period: '7 days', price: 325 },
+  { size: '12 Yard Skip', period: '14 days', price: 400 },
+  { size: '14 Yard Skip', period: '14 days', price: 450 },
 ];
+
+const steps = [
+  { name: 'Postcode', icon: MapPinIcon },
+  { name: 'Waste Type', icon: TrashIcon },
+  { name: 'Skip Size', icon: CubeIcon },
+  { name: 'Permit', icon: DocumentTextIcon },
+  { name: 'Date', icon: CalendarIcon },
+  { name: 'Payment', icon: CreditCardIcon },
+];
+
+const SkipSelection = () => {
+  const [selectedSkip, setSelectedSkip] = useState<Skip | null>(null);
+  const [currentStep, setCurrentStep] = useState<number>(2); // Example: step 2 (Skip Size)
+
+  const handleSelect = (skip: Skip) => {
+    setSelectedSkip(skip);
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-white via-gray-100 to-gray-200 p-4 md:p-8 font-sans">
+      {/* App Bar */}
+      <header className="flex justify-between items-center mb-6">
+        <h1 className="text-2xl md:text-4xl font-extrabold text-gray-900">Select Your Skip</h1>
+        <button className="px-4 py-2 bg-blue-600 text-white rounded-full shadow hover:bg-blue-700 transition">Help</button>
+      </header>
+
+      {/* Improved Progress Steps */}
+      <div className="flex flex-wrap items-center justify-center gap-2 mb-8">
+        {steps.map((step, index) => {
+          const Icon = step.icon;
+          const isActive = index <= currentStep;
+
+          return (
+            <button
+              key={index}
+              type="button"
+              className={`flex flex-col items-center justify-center min-w-[80px] px-3 py-2 rounded-lg transition ${isActive ? 'bg-blue-600 text-white shadow-lg' : 'bg-gray-200 text-gray-600'
+                } hover:scale-105`}
+              onClick={() => setCurrentStep(index)}
+            >
+              <Icon className="w-5 h-5 md:w-6 md:h-6 mb-1" />
+              <span className="text-xs md:text-sm font-semibold">{step.name}</span>
+            </button>
+          );
+        })}
+      </div>
+
+
+      {/* Skip Selection Grid */}
+      <div className="grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+        {skipSizes.map((skip, index) => (
+          <div
+            key={index}
+            onClick={() => handleSelect(skip)}
+            className={`relative flex flex-col justify-between bg-white rounded-2xl p-6 shadow-lg cursor-pointer transition transform hover:scale-105 ${selectedSkip === skip ? 'ring-4 ring-blue-400' : ''
+              }`}
+          >
+            <div>
+              <img
+                src={`https://via.placeholder.com/300x160/efefef/333?text=${encodeURIComponent(skip.size)}`}
+                alt={skip.size}
+                className="rounded-xl mb-4 w-full h-40 object-cover"
+              />
+              <h2 className="text-lg font-bold text-gray-800 mb-1">{skip.size}</h2>
+              <p className="text-sm text-gray-500 mb-1">Hire: {skip.period}</p>
+              <p className="text-xl text-blue-600 font-bold">£{skip.price}</p>
+            </div>
+            <div className="mt-4">
+              <button
+                className={`w-full py-2 rounded-xl font-semibold text-sm ${selectedSkip === skip
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-gray-200 text-gray-800 hover:bg-gray-300'
+                  }`}
+              >
+                {selectedSkip === skip ? 'Selected' : 'Select'}
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Bottom Navigation */}
+      <div className="fixed inset-x-0 bottom-0 bg-white shadow-t p-4 flex justify-between items-center md:static md:mt-8">
+        <p className="text-gray-600 text-sm">
+          {selectedSkip ? `Selected: ${selectedSkip.size}` : 'No skip selected'}
+        </p>
+        <button
+          className={`px-6 py-3 rounded-full text-white font-semibold ${selectedSkip ? 'bg-blue-600 hover:bg-blue-700' : 'bg-gray-400 cursor-not-allowed'
+            }`}
+          disabled={!selectedSkip}
+          onClick={() => alert(`Proceeding with: ${selectedSkip?.size}`)}
+        >
+          Continue
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default SkipSelection;
